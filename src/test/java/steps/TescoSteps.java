@@ -19,13 +19,11 @@ import java.time.Duration;
 public class TescoSteps extends BaseTest {
 
     WebDriver driver;
-   // HomePage homePage;
-    RegistrationPage registrationPage;
+
 
 
     @Before
     public void openBrowser() {
-       //beforeAll();
         driver = DriverInitializer.initDriver(BrowserType.CHROME_SELENIUM_MGR);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         driver.manage().window().maximize();
@@ -52,16 +50,19 @@ public class TescoSteps extends BaseTest {
 
     @Then("I am directed to Registration page")
     public void checkRegistrationPage(){
+        RegistrationPage registrationPage = new RegistrationPage(driver);
         registrationPage.isLoaded();
     }
 
     @And("Email address field is visible")
     public void emailVisible(){
+        RegistrationPage registrationPage = new RegistrationPage(driver);
         registrationPage.emailVisible();
     }
 
     @And("Password field is visible")
     public void passwordVisible(){
+        RegistrationPage registrationPage = new RegistrationPage(driver);
         registrationPage.passwordVisible();
     }
 
