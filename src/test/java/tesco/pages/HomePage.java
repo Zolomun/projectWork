@@ -8,7 +8,6 @@ import org.openqa.selenium.support.FindBy;
 public class HomePage extends BasePage {
 
     @FindBy(xpath = "//button[contains(@class, 'cookies-notification__button')]")
-            //"//span[text() = \"Minden Cookie elfogadása\"]")
     WebElement acceptCookieButton;
 
     @FindBy(xpath = "//span[text() = \"Regisztráció\"]")
