@@ -4,8 +4,11 @@ Feature: Registration can be initiated
     Given I open TescoOnline
     When I accept cookies
 
-  Scenario: Initiate registration
-    When I click on Registration button
-    Then I am directed to Registration page
-    And Email address field is visible
-    And Password field is visible
+  Scenario Outline: Registration to site
+    When I register with the following details "<email>" and "<password>" and "<firstName>" and "<lastName>" and "<primaryPhone>":
+    Then I can see the Sign out button
+
+    Examples:
+      | email                              | password        | firstName | lastName | primaryPhone |
+      | your.email+fakedata13598@gmail.com | iH424_tZzFIzdYx | valami    | valaki   | 36405888888  |
+
