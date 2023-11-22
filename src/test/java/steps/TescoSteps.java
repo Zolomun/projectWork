@@ -4,22 +4,18 @@ import baseItems.BaseTest;
 import browser.BrowserType;
 import browser.DriverInitializer;
 import browser.Settings;
-import io.cucumber.java.After;
 import io.cucumber.java.Before;
-import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.WebDriver;
-import tesco.pages.HomePage;
-import tesco.pages.RegistrationPage;
+import tesco.pages.*;
 
 import java.time.Duration;
 
 public class TescoSteps extends BaseTest {
 
     WebDriver driver;
-
 
 
     @Before
@@ -32,8 +28,6 @@ public class TescoSteps extends BaseTest {
     @Given("I open TescoOnline")
     public void iOpenTescoOnline() {
         driver.get(Settings.TESCO_URL);
-
-
     }
 
     @When("I accept cookies")
@@ -42,34 +36,30 @@ public class TescoSteps extends BaseTest {
         homePage.clickOnAcceptCookies();
     }
 
-    @When("I click on Registration button")
-    public void iClickOnRegistrate(){
+
+    @When("I register with the following details {string} and {string} and {string} and {string} and {string}:")
+    public void iRegisterWithTheFollowingUser(String email, String password, String firstName, String lastName, String primaryPhone) throws InterruptedException {
         HomePage homePage = new HomePage(driver);
-        homePage.clickOnRegistrate();
+        RegistrationStepOnePage registrationStepOnePagePage = homePage.clickOnRegistrate();
+        registrationStepOnePagePage.isLoaded();
+        RegistrationStepTwoPage registrationStepTwoPage = registrationStepOnePagePage.registrationFirstStep(email, password);
+        RegistrationStepThreePage registrationStepThreePage = registrationStepTwoPage.registrationSecondStep();
+        registrationStepThreePage.registrationThirdStep(firstName, lastName, primaryPhone);
+
+
     }
 
-    @Then("I am directed to Registration page")
-    public void checkRegistrationPage(){
-        RegistrationPage registrationPage = new RegistrationPage(driver);
-        registrationPage.isLoaded();
+    @Then("I can see the Sign out button")
+    public void iCanSeeTheSignOutButton() {
+        AfterRegHomePage afterRegHomePage = new AfterRegHomePage(driver);
+        afterRegHomePage.checkSignOutButton();
     }
 
-    @And("Email address field is visible")
-    public void emailVisible(){
-        RegistrationPage registrationPage = new RegistrationPage(driver);
-        registrationPage.emailVisible();
-    }
 
-    @And("Password field is visible")
-    public void passwordVisible(){
-        RegistrationPage registrationPage = new RegistrationPage(driver);
-        registrationPage.passwordVisible();
-    }
+//    @After
+//    public void closeBrowser(){
+//        driver.quit();
+//    }
 
-    @After
-    public void closeBrowser(){
-        //afterAll();
-        driver.quit();
-    }
 
 }

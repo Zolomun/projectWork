@@ -18,12 +18,13 @@ public class HomePage extends BasePage {
         super(driver);
     }
 
-    public void clickOnAcceptCookies(){
+    public void clickOnAcceptCookies() {
         acceptCookieButton.click();
     }
 
-    public RegistrationPage clickOnRegistrate(){
+    public RegistrationStepOnePage clickOnRegistrate() {
         registrationButton.click();
-        return new RegistrationPage(driver);
+        return new RegistrationStepOnePage(driver);
     }
+
 }
