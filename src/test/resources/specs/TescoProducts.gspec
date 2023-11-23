@@ -1,0 +1,28 @@
+@objects
+    logo            xpath    //div[@class = "brand-header__logo"]
+    cartButton      xpath    //a[@data-auto = "basket-icon"]
+    searchBar       xpath    //input[@id= "search-input"]
+    tiles           xpath    //li[@class="product-list--list-item"]
+    header          xpath    //div[@class="brand-header__backdrop"]
+
+= Header =
+
+    @on desktop
+        logo:
+            left-of cartButton
+            centered horizontally inside viewport
+
+    @on desktop
+        searchBar:
+            width ~365px
+            height ~40px
+
+= Content =
+
+    @on desktop
+        tiles:
+            aligned horizontally all tiles
+
+    @on desktop
+        cartButton:
+            below header

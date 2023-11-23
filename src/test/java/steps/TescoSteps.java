@@ -4,6 +4,10 @@ import baseItems.BaseTest;
 import browser.BrowserType;
 import browser.DriverInitializer;
 import browser.Settings;
+import com.galenframework.api.Galen;
+import com.galenframework.reports.GalenTestInfo;
+import com.galenframework.reports.HtmlReportBuilder;
+import com.galenframework.reports.model.LayoutReport;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
@@ -14,7 +18,10 @@ import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.WebDriver;
 import tesco.pages.*;
 
+import java.io.IOException;
 import java.time.Duration;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TescoSteps extends BaseTest {
 
@@ -55,12 +62,28 @@ public class TescoSteps extends BaseTest {
     }
 
     @When("I search and add a product to my cart: {string}")
-    public void addProductToMyCart(String product) {
+    public void addProductToMyCart(String product) throws IOException {
         LoggedInHomePage loggedInHomePage = new LoggedInHomePage(driver);
         loggedInHomePage.searchItem(product);
         SearchResultsPage searchResultsPage = new SearchResultsPage(driver);
         Assertions.assertTrue(searchResultsPage.checkSearchResult(product), product);
         searchResultsPage.addProductToCart();
+
+        List<String> tags = new ArrayList<String>();
+        tags.add("desktop");
+        LayoutReport report = Galen.checkLayout(driver, "/specs/tescoProducts.gspec", tags);
+        createReport(report);
+    }
+
+    public void createReport(LayoutReport report) throws IOException {
+        GalenTestInfo testInfo = GalenTestInfo.fromString("Tesco products page");
+        testInfo.getReport().layout(report, "Tesco products page layout test");
+
+        List<GalenTestInfo> testInfoList = new ArrayList<GalenTestInfo>();
+
+        testInfoList.add(testInfo);
+
+        new HtmlReportBuilder().build(testInfoList, "galen/test-report/");
     }
 
     @Then("{string} is visible in my cart")
