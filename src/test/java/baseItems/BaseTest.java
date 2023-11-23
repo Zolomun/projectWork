@@ -13,12 +13,12 @@ public class BaseTest {
 
 
     @BeforeAll
-    public static void beforeAll(){
+    public static void beforeAll() {
         driver = DriverInitializer.initDriver(BrowserType.CHROME_SELENIUM_MGR);
     }
 
     @AfterAll
-    public static void afterAll(){
+    public static void afterAll() {
         driver.quit();
     }
 

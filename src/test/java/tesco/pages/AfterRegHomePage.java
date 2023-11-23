@@ -10,7 +10,6 @@ public class AfterRegHomePage extends BasePage {
     @FindBy(xpath = "//span[text() = \"Kijelentkezés\"]")
     WebElement signOutButton;
 
-
     public AfterRegHomePage(WebDriver driver) {
         super(driver);
     }
@@ -18,5 +17,6 @@ public class AfterRegHomePage extends BasePage {
     public void checkSignOutButton() {
         signOutButton.isDisplayed();
     }
+
 
 }

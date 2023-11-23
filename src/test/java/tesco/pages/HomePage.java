@@ -13,6 +13,8 @@ public class HomePage extends BasePage {
     @FindBy(xpath = "//span[text() = \"Regisztráció\"]")
     WebElement registrationButton;
 
+    @FindBy(xpath = "//span[contains(text(), \"Bejelentkezés\")]")
+    WebElement loginButton;
 
     public HomePage(WebDriver driver) {
         super(driver);
@@ -25,6 +27,10 @@ public class HomePage extends BasePage {
     public RegistrationStepOnePage clickOnRegistrate() {
         registrationButton.click();
         return new RegistrationStepOnePage(driver);
+    }
+
+    public void clickOnLogIn() {
+        loginButton.click();
     }
 
 }
