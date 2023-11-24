@@ -10,7 +10,7 @@ import static io.cucumber.junit.platform.engine.Constants.PLUGIN_PROPERTY_NAME;
 @IncludeEngines("cucumber")
 
 @SelectClasspathResource("featurefiles")
-@ConfigurationParameter(key = GLUE_PROPERTY_NAME, value = "hu.dt.cucumber.converters,hu.dt.cucumber.steps")
+@ConfigurationParameter(key = GLUE_PROPERTY_NAME, value = "java.tesco.pages,java.steps")
 @ConfigurationParameter(key = PLUGIN_PROPERTY_NAME, value = "json:reports/cucumber-reports.json")
 
 @ConfigurationParameter(key = PLUGIN_PROPERTY_NAME, value = "html:reports/result.html")
