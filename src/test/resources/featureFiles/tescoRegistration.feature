@@ -10,5 +10,5 @@ Feature: Registration can be initiated
 
     Examples:
       | email                              | password        | firstName | lastName | primaryPhone |
-      | your.email+fakedata13604@gmail.com | iH424_tZzFIzdYx | valami    | valaki   | 36405888888  |
+      | your.email+fakedata13607@gmail.com | iH424_tZzFIzdYx | valami    | valaki   | 36405888888  |
 
